@@ -1,0 +1,81 @@
+﻿@using PMSWebApplication.Helpers
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Project Management System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Attachments", "Create", "Attachments")</li>
+                    @if (User.IsInRole(ApplicationUserRoles.Administrator))
+                    {
+                        <li>@Html.ActionLink("Projects", "Index", "Projects")</li>
+                        <li>@Html.ActionLink("Payments", "Index", "Payments")</li>
+                        <li>@Html.ActionLink("Task", "Index", "Tasks")</li>
+
+                        <li>
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown open">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Reports<span class="caret"></span></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#">@Html.ActionLink("Monthly Report", "MonthlyReport", "Reporting")</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">@Html.ActionLink("Due Amount Report", "DueAmountReport", "Reporting")</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">@Html.ActionLink("Upcoming Payment Report", "UpcomingPaymentReport", "Reporting")</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">@Html.ActionLink("Revenue Report", "RevenueReport", "Reporting")</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">@Html.ActionLink("Deadline Report", "DeadlineListReport", "Reporting")</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">@Html.ActionLink("Project Status Report", "ProjectStatusReport", "Reporting")</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">@Html.ActionLink("Task Status Report", "TaskStatusReport", "Reporting")</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">@Html.ActionLink("Priority Report", "PriorityReport", "Reporting")</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">@Html.ActionLink("Payment History Report", "PaymentHistoryReport", "Reporting")</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Project Management System</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

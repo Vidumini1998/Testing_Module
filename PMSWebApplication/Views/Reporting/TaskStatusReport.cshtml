@@ -1,0 +1,104 @@
+﻿@model IEnumerable<PMSWebApplication.Models.TaskStatusReport>
+@{
+    ViewBag.Title = "TaskStatusReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Task Status Report</h2>
+
+@*@using (Html.BeginForm())
+    {
+            <table>
+                <tr>
+                    <th>
+
+                        @Html.DropDownList("TaskName", (IEnumerable<SelectListItem>)ViewBag.taskStatusReport, htmlAttributes: new { @class = "form-control" })
+
+                    </th>
+                    <th>
+                        <input type="submit" value="Search" />
+                    </th>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th>
+                        @Html.ActionLink("Task Status Report", "TaskStatusReport")
+                    </th>
+                </tr>
+            </table>*@
+
+@*}*@
+
+@*<br /> <br />
+
+    <p>
+        <div>
+            <a href="~/Reports/ExportTaskStatusReport" target="_blank" class="btn btn-primary" style="margin-top:20px;">Download</a>
+        </div>
+    </p>
+
+    <br /><br />*@
+
+@*<div>
+        @Html.ActionLink("Download", "ExportTaskStatusReport", "Reporting", new { @class = "btn btn-primary" }, null)
+    </div>*@
+
+<br />
+
+<div>
+    @Html.ActionLink("Download", "Export", "Payments", new { @class = "btn btn-primary" }, null)
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Deadline)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.ClientName)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaskName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaskStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeName)
+        </th>
+        @*<th></th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deadline)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.ClientName)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeName)
+            </td>
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                </td>*@
+        </tr>
+    }
+</table>

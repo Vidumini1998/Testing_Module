@@ -1,0 +1,108 @@
+﻿@model IEnumerable<PMSWebApplication.Models.DomainModels.Payment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Payment List</h2>
+
+<p>
+    @using (Html.BeginForm())
+
+
+    {
+        <div class="pull-right">
+            <table>
+                <tr>
+                    <th>
+
+                        @Html.DropDownList("ProjectId", null, htmlAttributes: new { @class = "form-control" })
+
+                    </th>
+                    <th>
+                        <input type="submit" value="Search" />
+                    </th>
+                </tr>
+            </table>
+        </div>
+        <table>
+            <tr>
+                <th>
+                    @Html.ActionLink("Add Payment", "Create")
+                </th>
+                </tr>
+            </table>
+
+    }
+</p>
+
+<div>
+    @Html.ActionLink("Download", "ExportPaymentReport", "Payments", new { @class = "btn btn-primary" }, null)
+</div>    
+
+<div>
+    @Html.ActionLink("Download_PDF", "ExportPaymentReport", "Report", new { @class = "btn btn-primary" }, null)
+</div>
+
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Project.ProjectName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Task.TaskName)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.InvoiceNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayMethod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayDiscription)
+        </th>
+        <th></th>*@
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.ProjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Task.TaskName)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.InvoiceNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayMethod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayDiscription)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info btn-sm" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+            </td>*@
+        </tr>
+
+    }
+
+
+</table>
