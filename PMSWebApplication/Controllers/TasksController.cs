@@ -130,38 +130,38 @@ namespace PMSWebApplication.Controllers
         }
     }
 
-    public async Task<ActionResult> ExportTaskReport()
-    {
-        ReportDocument rd = new ReportDocument();
-        rd.Load(Path.Combine(Server.MapPath("//Reporting//TaskStatusReport.rpt")));
-        var project = await db.Projects.ToListAsync();
+    //public async Task<ActionResult> ExportTaskReport()
+    //{
+    //    ReportDocument rd = new ReportDocument();
+    //    rd.Load(Path.Combine(Server.MapPath("//Reporting//TaskStatusReport.rpt")));
+    //    var project = await db.Projects.ToListAsync();
 
-        foreach (var task in project)
-        {
-            rd.SetDataSource(db.Tasks.Where(x => x.ProjectId == task.Id).Select(c => new
-            {
-                
-                ProjectName = c.ProjectId.ToString(),
-                TaskName = c.TaskName.ToString(),
-                TaskStatus = c.TaskStatus.ToString(),
-                EmployeeName = c.AssignedEmployee.ToString(),
+    //    foreach (var task in project)
+    //    {
+    //        rd.SetDataSource(db.Tasks.Where(x => x.ProjectId == task.Id).Select(c => new
+    //        {
 
-            }).ToList());
+    //            ProjectName = c.ProjectId.ToString(),
+    //            TaskName = c.TaskName.ToString(),
+    //            TaskStatus = c.TaskStatus.ToString(),
+    //            EmployeeName = c.AssignedEmployee.ToString(),
 
-        }
+    //        }).ToList());
 
-        Response.Buffer = false;
-        Response.ClearContent();
-        Response.ClearHeaders();
+    //    }
 
-        rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
-        rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(5, 5, 5, 5));
-        rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperA5;
+    //    Response.Buffer = false;
+    //    Response.ClearContent();
+    //    Response.ClearHeaders();
 
-        Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-        stream.Seek(0, SeekOrigin.Begin);
+    //    rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
+    //    rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(5, 5, 5, 5));
+    //    rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperA5;
 
-        return File(stream, "application/pdf", "TaskstatusReport.pdf");
-    }
+    //    Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+    //    stream.Seek(0, SeekOrigin.Begin);
 
+    //    return File(stream, "application/pdf", "TaskstatusReport.pdf");
+    //}
 }
+
