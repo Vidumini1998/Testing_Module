@@ -7,34 +7,35 @@
 <h2>Due Amount Report</h2>
 
 @*<p>
-    @using (Html.BeginForm())
+        @using (Html.BeginForm())
 
 
-    {
-        <div class="pull-right">
+        {
+            <div class="pull-right">
+                <table>
+    <a href="~/Views/Reporting/DueAmountReport.cshtml">~/Views/Reporting/DueAmountReport.cshtml</a> 
+                    <tr>
+                        <th>
+
+                            @Html.DropDownList("ProjectId", null, htmlAttributes: new { @class = "form-control" })
+
+                        </th>
+                        <th>
+                            <input type="submit" value="Search" />
+                        </th>
+                    </tr>
+                </table>
+            </div>
             <table>
                 <tr>
                     <th>
-
-                        @Html.DropDownList("ProjectId", null, htmlAttributes: new { @class = "form-control" })
-
-                    </th>
-                    <th>
-                        <input type="submit" value="Search" />
+                        @Html.ActionLink("Add Payment", "Create")
                     </th>
                 </tr>
             </table>
-        </div>
-        <table>
-            <tr>
-                <th>
-                    @Html.ActionLink("Add Payment", "Create")
-                </th>
-            </tr>
-        </table>
 
-    }
-</p>*@
+        }
+    </p>*@
 
 
 @*<div >

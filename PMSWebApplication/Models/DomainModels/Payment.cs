@@ -19,6 +19,9 @@ namespace PMSWebApplication.Models.DomainModels
         public int TaskId { get; set; }
         public virtual Task Task { get; set; }
 
+        [Display(Name = "Task Stage")]
+        public string TaskStages { get; set; }
+
         [Required]
         [Display(Name = "Invoice No")]
         public int InvoiceNo { get; set; }

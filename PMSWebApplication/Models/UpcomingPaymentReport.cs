@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace PMSWebApplication.Models
 {
@@ -14,6 +11,8 @@ namespace PMSWebApplication.Models
         public string ProjectName { get; set; }
 
         public string TaskName { get; set; }
+
+        public string TaskStages { get; set; }
 
         public string ClientName { get; set; }
 

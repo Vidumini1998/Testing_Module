@@ -270,6 +270,10 @@
     <Compile Include="Migrations\202104071317121_changepaymentmodels6.Designer.cs">
       <DependentUpon>202104071317121_changepaymentmodels6.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105111847028_AddTaskStagetoPaymentModel.cs" />
+    <Compile Include="Migrations\202105111847028_AddTaskStagetoPaymentModel.Designer.cs">
+      <DependentUpon>202105111847028_AddTaskStagetoPaymentModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DeadlineListReport.cs" />
@@ -292,6 +296,7 @@
     <Compile Include="Models\IncomeReport.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MonthlyReport.cs" />
+    <Compile Include="Models\PayReport.cs" />
     <Compile Include="Models\PaymentHistoryReport.cs" />
     <Compile Include="Models\PriorityReport.cs" />
     <Compile Include="Models\ProjectStatusReport.cs" />
@@ -316,6 +321,24 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PaymentReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\TaskStatusReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TaskStatusReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ProjectReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\TaskReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TaskReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Scripts\PriorityReport.cs">
@@ -493,6 +516,9 @@
     <EmbeddedResource Include="Migrations\202104071317121_changepaymentmodels6.resx">
       <DependentUpon>202104071317121_changepaymentmodels6.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105111847028_AddTaskStagetoPaymentModel.resx">
+      <DependentUpon>202105111847028_AddTaskStagetoPaymentModel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\DueAmountReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DueAmountReport.cs</LastGenOutput>
@@ -504,6 +530,18 @@
     <EmbeddedResource Include="Reports\PaymentReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PaymentReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\TaskStatusReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TaskStatusReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ProjectReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ProjectReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\TaskReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TaskReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\PriorityReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

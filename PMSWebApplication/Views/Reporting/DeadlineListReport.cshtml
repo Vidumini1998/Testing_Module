@@ -6,6 +6,33 @@
 
 <h2>Deadline List Report</h2>
 
+@*@using (Html.BeginForm())
+
+
+{
+
+
+    <div class="container">
+        <div class="row" style="margin-bottom:15px">
+            @Html.ActionLink("Deadline List Report", "DeadlineListReport")
+        </div>
+        <div class="row" style="margin-bottom:15px">
+            <div class="col-xs-6 col-lg-3" style="padding-left:0">
+                @Html.DropDownList("ProjectName", null, "Select Project", htmlAttributes: new { @class = "form-control", @selected = "-1" })
+
+            </div>
+            <div class="">
+                <input class="btn btn-success" type="submit" value="Search" />
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+}*@
+
 <table class="table">
     <tr>
         <th>

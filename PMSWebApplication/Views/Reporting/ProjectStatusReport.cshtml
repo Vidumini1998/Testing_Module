@@ -6,6 +6,20 @@
 
 <h2>Project Status Report</h2>
 
+@using (Ajax.BeginForm("ProjectStatusReport", "Reporting", FormMethod.Post,
+                    new AjaxOptions
+                    {
+                        InsertionMode = InsertionMode.Replace,
+                        HttpMethod = "POST",
+                        UpdateTargetId = "search-results"
+                    }))
+{
+    <div>
+        @Html.TextBox("status")
+        <input type="submit" value="Search" />
+    </div>
+}
+
 <table class="table">
     <tr>
         <th>
