@@ -15,9 +15,25 @@ namespace PMSWebApplication.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Reporting
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        public async Task<ActionResult> Index()
         {
-            return View();
+            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "ProjectName");
+            var payments = db.Payments.Include(p => p.Project).Include(p => p.Task);
+            return View(await payments.ToListAsync());
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> Index(int ProjectId)
+        {
+            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "ProjectName");
+            var payments = db.Payments.Include(p => p.Project).Include(p => p.Task).Where(p => p.ProjectId == ProjectId);
+            return View(await payments.ToListAsync());
         }
 
         public async Task<ActionResult> PriorityReport()
@@ -89,63 +105,25 @@ namespace PMSWebApplication.Controllers
 
         }
 
-        //public ActionResult ExportTaskStatusReport()
-        //{
-
-        //    ReportDocument rd = new ReportDocument();
-        //    rd.Load(Path.Combine(Server.MapPath("\\Reports\\TaskStatusReport.rpt")));
-        //    rd.SetDataSource(db.Projects.Select(c => new
-        //    {
-        //        ProjectName = c.ProjectName,
-        //    }).ToList());
-
-        //    rd.SetDataSource(db.Tasks.Select(c => new
-        //    {
-        //        Deadline = c.Deadline,
-        //        TaskName = c.TaskName,
-        //        TaskStatus = c.TaskStatus
-
-        //    }).ToList());
-
-
-        //    Response.Buffer = false;
-        //    Response.ClearContent();
-        //    Response.ClearHeaders();
-
-
-        //    rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
-        //    rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(5, 5, 5, 5));
-        //    rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperA5;
-
-        //    Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-        //    stream.Seek(0, SeekOrigin.Begin);
-
-        //    return File(stream, "application/pdf", "CustomerList.pdf");
-        //}
-
-        public async Task<ActionResult> ExportTaskStatusReport()
+        public ActionResult ExportTaskStatusReport()
         {
+
             ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("//Reporting//TaskStatusReport.rpt")));
-            var project = await db.Projects.ToListAsync();
+            rd.Load(Path.Combine(Server.MapPath("\\Reports\\TaskStatusReport.rpt")));
 
-            foreach (var task in project)
+            rd.SetDataSource(db.Tasks.Where(x => x.ProjectId == Task.CurrentId).Select(c => new
             {
-                rd.SetDataSource(db.Tasks.Where(x => x.ProjectId == task.Id).Select(c => new
-                {
-                    //Deadline = c.Payment.ToString(),
-                    ProjectName = c.ProjectId.ToString(),
-                    TaskName = c.TaskName.ToString(),
-                    TaskStatus = c.TaskStatus.ToString(),
-                    EmployeeName = c.AssignedEmployee.ToString(),
-                    
-                }).ToList());
+                ProjectName = c.ProjectId.ToString(),
+                TaskName = c.TaskName.ToString(),
+                TaskStatus = c.TaskStatus.ToString(),
+                EmployeeName = c.AssignedEmployee.ToString(),
 
-            }
+            }).ToList());
 
             Response.Buffer = false;
             Response.ClearContent();
             Response.ClearHeaders();
+
 
             rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
             rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(5, 5, 5, 5));
@@ -154,8 +132,41 @@ namespace PMSWebApplication.Controllers
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
 
-            return File(stream, "application/pdf", "TaskstatusReport.pdf");
+            return File(stream, "application/pdf", "CustomerList.pdf");
         }
+
+        //public async Task<ActionResult> ExportTaskStatusReport1()
+        //{
+        //    ReportDocument rd = new ReportDocument();
+        //    rd.Load(Path.Combine(Server.MapPath("//Reports//TaskStatusReport.rpt")));
+        //    var project = await db.Projects.ToListAsync();
+
+        //    foreach (var task in project)
+        //    {
+        //        rd.SetDataSource(db.Tasks.Where(x => x.ProjectId == task.Id).Select(c => new
+        //        {
+        //            ProjectName = c.ProjectId.ToString(),
+        //            TaskName = c.TaskName.ToString(),
+        //            TaskStatus = c.TaskStatus.ToString(),
+        //            EmployeeName = c.AssignedEmployee.ToString(),
+
+        //        }).ToList());
+
+        //    }
+
+        //    Response.Buffer = false;
+        //    Response.ClearContent();
+        //    Response.ClearHeaders();
+
+        //    rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
+        //    rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(5, 5, 5, 5));
+        //    rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperA5;
+
+        //    Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+        //    stream.Seek(0, SeekOrigin.Begin);
+
+        //    return File(stream, "application/pdf", "TaskstatusReport.pdf");
+        //}
 
         public async Task<ActionResult> DueAmountReport()
         {
@@ -629,6 +640,8 @@ namespace PMSWebApplication.Controllers
         }
     }
 
+
+
 }
 
-    
+

@@ -25,6 +25,7 @@ namespace PMSWebApplication.Controllers
             var payments = db.Payments.Include(p => p.Project).Include(p => p.Task);
             return View(await payments.ToListAsync());
         }
+
         [HttpPost]
         public async Task<ActionResult> Index(int ProjectId)
         {
